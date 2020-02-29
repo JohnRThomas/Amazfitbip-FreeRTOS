@@ -17,11 +17,11 @@ LFLAGS+=-Wl,--start-group -lc -lgcc -lnosys -Wl,--end-group
 M0_FLAGS= $(SFLAGS) -mcpu=cortex-m0 -mthumb -msoft-float
 M0P_FLAGS= $(SFLAGS) -mcpu=cortex-m0plus -mthumb -msoft-float
 M3_FLAGS= $(SFLAGS) -mcpu=cortex-m3 -mthumb -msoft-float
-M4FH_FLAGS= $(SFLAGS) -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
+M4FH_FLAGS= $(SFLAGS) -mcpu=cortex-m4 -mthumb -specs=nano.specs -specs=nosys.specs -mfloat-abi=hard -mfpu=fpv4-sp-d16
 M7SP_FLAGS= $(SFLAGS) -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-sp-d16
 
-BINARY		= main
-SRCFILES	= main.c freertos/heap_4.c freertos/list.c freertos/port.c freertos/queue.c freertos/tasks.c freertos/opencm3.c
+BINARY		= lcd_test
+SRCFILES	= lcd_test.cpp lcd_lpm013m126c.cpp freertos/heap_4.c freertos/list.c freertos/port.c freertos/queue.c freertos/tasks.c freertos/opencm3.c
 LDSCRIPT	= stm32l476.ld
 
 include boards.stm32.mk
