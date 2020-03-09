@@ -9,7 +9,10 @@ OD=bin
 
 all: realall.really
 
-SFLAGS= --static -nostartfiles -std=c11 -g3 -Os
+CFLAGS= -std=c11
+CPPFLAGS= -std=c++11
+
+SFLAGS= --static -nostartfiles -g3 -Os
 SFLAGS+= -fno-common -ffunction-sections -fdata-sections
 SFLAGS+= -I./freertos -I. -I./libopencm3/include  -L./libopencm3/lib
 LFLAGS+=-Wl,--start-group -lc -lgcc -lnosys -Wl,--end-group
@@ -20,7 +23,7 @@ M3_FLAGS= $(SFLAGS) -mcpu=cortex-m3 -mthumb -msoft-float
 M4FH_FLAGS= $(SFLAGS) -mcpu=cortex-m4 -mthumb -specs=nano.specs -specs=nosys.specs -mfloat-abi=hard -mfpu=fpv4-sp-d16
 M7SP_FLAGS= $(SFLAGS) -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-sp-d16
 
-BINARY		= lcd_test
+BINARY		= main
 SRCFILES	= lcd_test.cpp lcd_lpm013m126c.cpp freertos/heap_4.c freertos/list.c freertos/port.c freertos/queue.c freertos/tasks.c freertos/opencm3.c
 LDSCRIPT	= stm32l476.ld
 
