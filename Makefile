@@ -24,7 +24,7 @@ M4FH_FLAGS= $(SFLAGS) -mcpu=cortex-m4 -mthumb -specs=nano.specs -specs=nosys.spe
 M7SP_FLAGS= $(SFLAGS) -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-sp-d16
 
 BINARY		= main
-SRCFILES	= lcd_test.cpp lcd_lpm013m126c.cpp freertos/heap_4.c freertos/list.c freertos/port.c freertos/queue.c freertos/tasks.c freertos/opencm3.c
+SRCFILES	= main.cpp lcd_lpm013m126c.cpp freertos/heap_4.c freertos/list.c freertos/port.c freertos/queue.c freertos/tasks.c freertos/opencm3.c
 LDSCRIPT	= stm32l476.ld
 
 include boards.stm32.mk
