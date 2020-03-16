@@ -5,7 +5,20 @@
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/usart.h>
 
-int _write(int fd, char *ptr, int len);
+static void setup_clock(void) {
+    // HSI16 at 16Mhz
+    rcc_set_hpre(RCC_CFGR_HPRE_DIV2); // Set to 16Mhz/2 = 8Mhz
+    rcc_set_ppre1(RCC_CFGR_PPRE1_DIV2); // Set to 8Mhz/2 = 4Mhz
+    rcc_set_ppre2(RCC_CFGR_PPRE2_DIV2); // Set to 8Mhz/2 = 4Mhz
+
+    rcc_osc_on(RCC_HSI16);
+    rcc_wait_for_osc_ready(RCC_HSI16);
+    rcc_set_sysclk_source(RCC_CFGR_SW_HSI16);
+
+    rcc_ahb_frequency  = 8000000;
+    rcc_apb1_frequency = 4000000;
+    rcc_apb2_frequency = 4000000;
+}
 
 void setup_gpio() {
     // PC9  : BACKLIGHT ON/OFF
@@ -50,16 +63,17 @@ int _write(int fd, char *ptr, int len) {
         ptr++;
     }
     return i;
-
 }
 
 int main(void) {
 
+    setup_clock();
     setup_gpio();
     setup_uart();
 
     while (true) {
-        usart_send_blocking(UART4_BASE, 'c');
+        printf("Hello World!\n");
+        for (int i = 0; i < 2500000; i++) __asm__("nop");	/* Wait a bit. */
     }
 
     return 0;
