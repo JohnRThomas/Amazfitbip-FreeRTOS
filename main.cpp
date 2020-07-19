@@ -5,8 +5,6 @@
 #include <libopencm3/stm32/spi.h>
 #include <libopencm3/stm32/usart.h>
 
-#include "lcd_lpm013m126c.hpp"
-
 #define LCD_SPI       SPI3
 #define LCD_SPI_CLOCK RCC_SPI3
 
